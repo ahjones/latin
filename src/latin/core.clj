@@ -5,13 +5,9 @@
 
 (def alphabet (memoize (fn [sq] (range 1 (sqrt (inc (count sq)))))))
 
-(defn rows
- [sq]
- (partition (sqrt (count sq)) sq))
+(defn rows [sq] (partition (sqrt (count sq)) sq))
 
-(defn cols
- [sq]
- (rows (apply interleave (rows sq))))
+(defn cols [sq] (rows (apply interleave (rows sq))))
 
 (defn valid-line [line] (or
 			 (every? #(= :unknown %) line)
