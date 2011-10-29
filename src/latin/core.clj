@@ -27,15 +27,14 @@
 
 (defn next-sq [sq] (for [x (alphabet sq)] (assoc sq (first (positions #(= :unknown %) sq)) x)))
 
-(defn latin2 [sols sq]
-  ;; (println (str sq " : " sols))
-  (if (valid-square? sq)
-    (if (finished? sq)
-      (cons sq sols)
-      (reduce latin2 sols (next-sq sq)))
-    sols))
-
-(defn latin [sq] (latin2 () sq))
+(defn latin
+  ([solutions sq]
+     (if (valid-square? sq)
+       (if (finished? sq)
+	 (cons sq solutions)
+	 (reduce latin solutions (next-sq sq)))
+       solutions))
+  ([sq] (latin () sq)))
 
 (def eg [1 2 3 :unknown :unknown :unknown :unknown :unknown :unknown])
 
