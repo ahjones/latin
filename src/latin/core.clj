@@ -6,12 +6,10 @@
 (def alphabet (memoize (fn [sq] (range 1 (sqrt (inc (count sq)))))))
 
 (defn rows
- "A sequence of the rows of the square"
  [sq]
  (partition (sqrt (count sq)) sq))
 
 (defn cols
- "A sequence of the columns of the square"
  [sq]
  (rows (apply interleave (rows sq))))
 
