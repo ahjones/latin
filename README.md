@@ -5,6 +5,6 @@ latin squares](http://en.wikipedia.org/wiki/Latin_square) for more info.
 
 ## License
 
-Copyright (C) 2011 FIXME
+Copyright (C) 2011 Andrew Jones
 
 Distributed under the Eclipse Public License, the same as Clojure.
