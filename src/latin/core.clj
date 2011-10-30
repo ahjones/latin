@@ -18,20 +18,17 @@
      #(every? valid-line (cols %))])
 
 (defn valid-square? [sq] (every? #(% sq) rules))
-
 (defn finished? [sq] (= 0 (count (filter #(= :unknown %) sq))))
 
-(defn next-sq [sq] (for [x (alphabet sq)] (assoc sq (first (positions #(= :unknown %) sq)) x)))
+(defn next-sq [sq]
+  (for [x (alphabet sq)
+	:let [n (assoc sq (first (positions #(= :unknown %) sq)) x)]
+	:when (valid-square? n)] n))
 
-(defn latin
-  ([solutions sq]
-     (if (valid-square? sq)
-       (if (finished? sq)
-	 (cons sq solutions)
-	 (reduce latin solutions (next-sq sq)))
-       solutions))
-  ([sq] (latin () sq)))
+(defn latin-tree [sq] (tree-seq (complement finished?) next-sq sq))
+(defn latin [sq]
+  (for [sq (latin-tree eg) :when (finished? sq)] sq))
 
-(def eg [1 2 3 :unknown :unknown :unknown :unknown :unknown :unknown])
+(def eg [:unknown :unknown :unknown :unknown :unknown :unknown :unknown :unknown :unknown])
 
-(latin eg) ;; ([1 2 3 3 1 2 2 3 1] [1 2 3 2 3 1 3 1 2])
+(latin eg)
