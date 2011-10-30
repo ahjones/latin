@@ -27,7 +27,7 @@
 
 (defn latin-tree [sq] (tree-seq (complement finished?) next-sq sq))
 (defn latin [sq]
-  (for [sq (latin-tree eg) :when (finished? sq)] sq))
+  (for [sq (latin-tree sq) :when (finished? sq)] sq))
 
 (def eg [:unknown :unknown :unknown :unknown :unknown :unknown :unknown :unknown :unknown])
 
